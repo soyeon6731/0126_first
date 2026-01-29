@@ -19,11 +19,11 @@ export function PlatformButton({ platform, url }: PlatformButtonProps) {
   return (
     <button
       onClick={handleClick}
-      className={`platform-button platform-button-${platform} flex-1 flex items-center justify-center gap-1`}
+      className={`platform-button platform-button-${platform} flex-1 flex items-center justify-center gap-0.5`}
       aria-label={`Open in ${config.name}`}
     >
       <span className="text-sm">{config.emoji}</span>
-      <span className="text-xs font-medium">{platform === 'youtube' ? 'YouTube' : 'Spotify'}</span>
+      <span className="text-xs font-medium">{platform === 'youtube' ? 'YT' : 'Spotify'}</span>
     </button>
   );
 }
