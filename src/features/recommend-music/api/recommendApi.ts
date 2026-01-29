@@ -1,7 +1,7 @@
 import {
   searchTracksByGenreAndMood,
   getTracksByIds,
-  type TrackWithLinks,
+  type Track,
 } from '@/entities/track';
 import {
   MAX_RECOMMENDATIONS,
@@ -34,7 +34,7 @@ async function analyzePrompt(userPrompt: string): Promise<MoodGenreAnalysis> {
  * Select top tracks via server-side API route
  */
 async function selectTopTracks(
-  tracks: TrackWithLinks[],
+  tracks: Track[],
   userPrompt: string,
   targetCount: number = MAX_RECOMMENDATIONS
 ): Promise<string[]> {
@@ -74,7 +74,7 @@ async function selectTopTracks(
 /**
  * Determine if a track is a hidden gem (unique genre combination)
  */
-export function isHiddenGem(track: TrackWithLinks): boolean {
+export function isHiddenGem(track: Track): boolean {
   const uniqueCombinations = [
     ['발라드', 'R&B'],
     ['힙합', '록'],
