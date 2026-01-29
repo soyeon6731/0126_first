@@ -1,12 +1,12 @@
 'use client';
 
 import React from 'react';
-import type { TrackWithLinks } from '@/entities/track';
+import type { Track } from '@/entities/track';
 import { TrackCard } from '@/entities/track';
 import { isHiddenGem } from '@/features/recommend-music';
 
 interface RecommendationGridProps {
-  tracks: TrackWithLinks[];
+  tracks: Track[];
 }
 
 export function RecommendationGrid({ tracks }: RecommendationGridProps) {

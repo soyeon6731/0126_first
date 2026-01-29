@@ -1,18 +1,18 @@
 'use client';
 
 import React from 'react';
-import type { TrackWithLinks } from '../model/types';
+import type { Track } from '../model/types';
 import { PlatformButton } from '@/entities/platform';
 import { HiddenGemBadge } from './HiddenGemBadge';
 
 interface TrackCardProps {
-  track: TrackWithLinks;
+  track: Track;
   isHiddenGem?: boolean;
   index?: number;
 }
 
 export function TrackCard({ track, isHiddenGem = false, index }: TrackCardProps) {
-  const { title, artist, genres, mood_tags, track_platform_links } = track;
+  const { title, artist, genres, mood_tags } = track;
 
   return (
     <div
@@ -68,13 +68,16 @@ export function TrackCard({ track, isHiddenGem = false, index }: TrackCardProps)
 
         {/* Platform Links - always at bottom, flex-shrink-0 */}
         <div className="flex gap-2 flex-shrink-0">
-          {track_platform_links?.map((link) => (
-            <PlatformButton
-              key={link.id}
-              platform={link.music_platforms.platform_name}
-              url={link.external_url}
-            />
-          ))}
+          <PlatformButton
+            platform="youtube"
+            artist={artist}
+            title={title}
+          />
+          <PlatformButton
+            platform="spotify"
+            artist={artist}
+            title={title}
+          />
         </div>
       </div>
     </div>

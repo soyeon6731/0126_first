@@ -1,4 +1,4 @@
-import type { TrackWithLinks } from '@/entities/track';
+import type { Track } from '@/entities/track';
 
 export type MessageRole = 'user' | 'bot' | 'system';
 
@@ -7,5 +7,5 @@ export interface Message {
   role: MessageRole;
   content: string;
   timestamp: Date;
-  recommendations?: TrackWithLinks[];
+  recommendations?: Track[];
 }

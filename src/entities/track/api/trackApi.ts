@@ -1,28 +1,16 @@
 import { supabase } from '@/shared/api/supabase';
-import type { Track, TrackWithLinks } from '../model/types';
+import type { Track } from '../model/types';
 
 /**
  * Search tracks by genre using GIN index
+ * 동적 검색 링크 방식으로 변경되어 더 이상 platform_links를 조인하지 않음
  */
 export async function searchTracksByGenre(
   genre: string
-): Promise<TrackWithLinks[]> {
+): Promise<Track[]> {
   const { data, error } = await supabase
     .from('music_tracks')
-    .select(
-      `
-      *,
-      track_platform_links (
-        id,
-        platform_id,
-        external_url,
-        music_platforms (
-          platform_name,
-          display_name
-        )
-      )
-    `
-    )
+    .select('*')
     .contains('genres', [genre])
     .limit(50);
 
@@ -31,31 +19,19 @@ export async function searchTracksByGenre(
     throw error;
   }
 
-  return (data as any[]) || [];
+  return (data as Track[]) || [];
 }
 
 /**
  * Search tracks by mood tag using GIN index
+ * 동적 검색 링크 방식으로 변경되어 더 이상 platform_links를 조인하지 않음
  */
 export async function searchTracksByMood(
   mood: string
-): Promise<TrackWithLinks[]> {
+): Promise<Track[]> {
   const { data, error } = await supabase
     .from('music_tracks')
-    .select(
-      `
-      *,
-      track_platform_links (
-        id,
-        platform_id,
-        external_url,
-        music_platforms (
-          platform_name,
-          display_name
-        )
-      )
-    `
-    )
+    .select('*')
     .contains('mood_tags', [mood])
     .limit(50);
 
@@ -64,30 +40,18 @@ export async function searchTracksByMood(
     throw error;
   }
 
-  return (data as any[]) || [];
+  return (data as Track[]) || [];
 }
 
 /**
  * Search tracks by both genre and mood
+ * 동적 검색 링크 방식으로 변경되어 더 이상 platform_links를 조인하지 않음
  */
 export async function searchTracksByGenreAndMood(
   genres: string[],
   moods: string[]
-): Promise<TrackWithLinks[]> {
-  let query = supabase.from('music_tracks').select(
-    `
-      *,
-      track_platform_links (
-        id,
-        platform_id,
-        external_url,
-        music_platforms (
-          platform_name,
-          display_name
-        )
-      )
-    `
-  );
+): Promise<Track[]> {
+  let query = supabase.from('music_tracks').select('*');
 
   // Add genre filter if provided
   if (genres.length > 0) {
@@ -110,29 +74,17 @@ export async function searchTracksByGenreAndMood(
     throw error;
   }
 
-  return (data as any[]) || [];
+  return (data as Track[]) || [];
 }
 
 /**
  * Get tracks by array of IDs
+ * 동적 검색 링크 방식으로 변경되어 더 이상 platform_links를 조인하지 않음
  */
-export async function getTracksByIds(ids: string[]): Promise<TrackWithLinks[]> {
+export async function getTracksByIds(ids: string[]): Promise<Track[]> {
   const { data, error } = await supabase
     .from('music_tracks')
-    .select(
-      `
-      *,
-      track_platform_links (
-        id,
-        platform_id,
-        external_url,
-        music_platforms (
-          platform_name,
-          display_name
-        )
-      )
-    `
-    )
+    .select('*')
     .in('id', ids);
 
   if (error) {
@@ -140,29 +92,17 @@ export async function getTracksByIds(ids: string[]): Promise<TrackWithLinks[]> {
     throw error;
   }
 
-  return (data as any[]) || [];
+  return (data as Track[]) || [];
 }
 
 /**
  * Get random tracks for initial display
+ * 동적 검색 링크 방식으로 변경되어 더 이상 platform_links를 조인하지 않음
  */
-export async function getRandomTracks(limit: number = 20): Promise<TrackWithLinks[]> {
+export async function getRandomTracks(limit: number = 20): Promise<Track[]> {
   const { data, error } = await supabase
     .from('music_tracks')
-    .select(
-      `
-      *,
-      track_platform_links (
-        id,
-        platform_id,
-        external_url,
-        music_platforms (
-          platform_name,
-          display_name
-        )
-      )
-    `
-    )
+    .select('*')
     .limit(limit);
 
   if (error) {
@@ -171,5 +111,5 @@ export async function getRandomTracks(limit: number = 20): Promise<TrackWithLink
   }
 
   // Shuffle the results
-  return ((data as any[]) || []).sort(() => Math.random() - 0.5);
+  return ((data as Track[]) || []).sort(() => Math.random() - 0.5);
 }
