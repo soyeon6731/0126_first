@@ -23,7 +23,7 @@ export function TrackCard({ track, isHiddenGem = false, index }: TrackCardProps)
       {isHiddenGem && <HiddenGemBadge />}
 
       {/* Album Art Placeholder with Pixel Border */}
-      <div className="relative overflow-hidden rounded-xl mb-3 bg-gradient-to-br from-primary-100 to-secondary-100 aspect-square border-3 border-primary-300">
+      <div className="relative overflow-hidden rounded-xl mb-3 bg-gradient-to-br from-primary-100 to-secondary-100 aspect-square border-3 border-primary-300 flex-shrink-0">
         <div className="absolute inset-0 flex items-center justify-center text-6xl">
           🎵
         </div>
@@ -35,19 +35,20 @@ export function TrackCard({ track, isHiddenGem = false, index }: TrackCardProps)
         <div className="absolute top-2 left-2 w-8 h-8 bg-white/40 rounded-full blur-sm" />
       </div>
 
-      {/* Track Info */}
-      <div className="flex-1 flex flex-col">
+      {/* Content Area - grows to fill space */}
+      <div className="flex-1 flex flex-col min-h-0">
+        {/* Track Info */}
         <h4 className="font-heading text-lg text-neutral-900 mb-1 truncate">
           {title}
         </h4>
-        <p className="text-sm text-neutral-600 truncate mb-3">{artist}</p>
+        <p className="text-sm text-neutral-600 truncate mb-2">{artist}</p>
 
-        {/* Genre & Mood Tags - Pixel Style */}
-        <div className="flex flex-wrap gap-1.5 mb-3">
+        {/* Genre & Mood Tags - Pixel Style - fixed height area */}
+        <div className="flex flex-wrap gap-1.5 mb-3 min-h-[32px] content-start">
           {genres.slice(0, 2).map((genre) => (
             <span
               key={genre}
-              className="px-2.5 py-1 bg-primary-100 text-primary-700 rounded-lg text-xs font-heading border-2 border-primary-300"
+              className="px-2.5 py-1 bg-primary-100 text-primary-700 rounded-lg text-xs font-heading border-2 border-primary-300 whitespace-nowrap"
             >
               {genre}
             </span>
@@ -55,18 +56,18 @@ export function TrackCard({ track, isHiddenGem = false, index }: TrackCardProps)
           {mood_tags.slice(0, 1).map((mood) => (
             <span
               key={mood}
-              className="px-2.5 py-1 bg-secondary-100 text-secondary-700 rounded-lg text-xs font-heading border-2 border-secondary-300"
+              className="px-2.5 py-1 bg-secondary-100 text-secondary-700 rounded-lg text-xs font-heading border-2 border-secondary-300 whitespace-nowrap"
             >
               {mood}
             </span>
           ))}
         </div>
 
-        {/* Spacer to push buttons to bottom */}
+        {/* Spacer */}
         <div className="flex-1" />
 
-        {/* Platform Links */}
-        <div className="flex gap-2 mt-auto">
+        {/* Platform Links - always at bottom */}
+        <div className="flex gap-2">
           {track_platform_links?.map((link) => (
             <PlatformButton
               key={link.id}
