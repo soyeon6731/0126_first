@@ -250,12 +250,13 @@
 
   /* Track Card - Pixel Game Style */
   .track-card {
-    @apply bg-white border-4 border-neutral-300 p-4 transition-all duration-300 relative;
+    @apply bg-white border-4 border-neutral-300 p-3 transition-all duration-300 relative;
     border-radius: 16px;
     width: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;
+    overflow: hidden;
     box-shadow:
       4px 4px 0 0 rgba(0, 0, 0, 0.1),
       0 6px 12px rgba(0, 0, 0, 0.05);
@@ -307,21 +308,21 @@
 
   /* Platform Buttons - Game Boy Style */
   .platform-button {
-    @apply px-4 py-2 border-3 transition-all duration-200 font-medium;
+    @apply px-3 py-1.5 border-3 transition-all duration-200 font-medium;
     border-radius: 10px;
     font-family: 'Galmuri11', 'Pretendard Variable', sans-serif;
-    font-size: 13px;
+    font-size: 12px;
   }
 
   .platform-button-youtube {
     @apply bg-red-100 border-red-400 text-red-700;
-    box-shadow: 0 3px 0 0 #DC2626;
+    box-shadow: 0 2px 0 0 #DC2626;
   }
 
   .platform-button-youtube:hover {
     @apply bg-red-200;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 0 0 #DC2626;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 0 #DC2626;
   }
 
   .platform-button-youtube:active {
@@ -331,13 +332,13 @@
 
   .platform-button-spotify {
     @apply bg-green-100 border-green-400 text-green-700;
-    box-shadow: 0 3px 0 0 #16A34A;
+    box-shadow: 0 2px 0 0 #16A34A;
   }
 
   .platform-button-spotify:hover {
     @apply bg-green-200;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 0 0 #16A34A;
+    transform: translateY(-1px);
+    box-shadow: 0 3px 0 0 #16A34A;
   }
 
   .platform-button-spotify:active {

@@ -22,9 +22,9 @@ export function TrackCard({ track, isHiddenGem = false, index }: TrackCardProps)
       {/* Hidden Gem Badge */}
       {isHiddenGem && <HiddenGemBadge />}
 
-      {/* Album Art Placeholder with Pixel Border */}
-      <div className="relative overflow-hidden rounded-xl mb-3 bg-gradient-to-br from-primary-100 to-secondary-100 aspect-square border-3 border-primary-300 flex-shrink-0">
-        <div className="absolute inset-0 flex items-center justify-center text-6xl">
+      {/* Album Art Placeholder with Pixel Border - Fixed height instead of aspect-square */}
+      <div className="relative overflow-hidden rounded-xl mb-2 bg-gradient-to-br from-primary-100 to-secondary-100 h-36 w-full border-3 border-primary-300 flex-shrink-0">
+        <div className="absolute inset-0 flex items-center justify-center text-5xl">
           🎵
         </div>
         {/* Pixel corner decorations */}
@@ -36,19 +36,19 @@ export function TrackCard({ track, isHiddenGem = false, index }: TrackCardProps)
       </div>
 
       {/* Content Area - grows to fill space */}
-      <div className="flex-1 flex flex-col min-h-0">
+      <div className="flex-1 flex flex-col min-h-0 overflow-hidden">
         {/* Track Info */}
-        <h4 className="font-heading text-lg text-neutral-900 mb-1 truncate">
+        <h4 className="font-heading text-base text-neutral-900 mb-0.5 truncate leading-tight">
           {title}
         </h4>
-        <p className="text-sm text-neutral-600 truncate mb-2">{artist}</p>
+        <p className="text-sm text-neutral-600 truncate mb-2 leading-tight">{artist}</p>
 
         {/* Genre & Mood Tags - Pixel Style - fixed height area */}
-        <div className="flex flex-wrap gap-1.5 mb-3 min-h-[32px] content-start">
+        <div className="flex flex-wrap gap-1 mb-2 h-7 content-start overflow-hidden">
           {genres.slice(0, 2).map((genre) => (
             <span
               key={genre}
-              className="px-2.5 py-1 bg-primary-100 text-primary-700 rounded-lg text-xs font-heading border-2 border-primary-300 whitespace-nowrap"
+              className="px-2 py-0.5 bg-primary-100 text-primary-700 rounded-lg text-xs font-heading border-2 border-primary-300 whitespace-nowrap h-fit"
             >
               {genre}
             </span>
@@ -56,18 +56,18 @@ export function TrackCard({ track, isHiddenGem = false, index }: TrackCardProps)
           {mood_tags.slice(0, 1).map((mood) => (
             <span
               key={mood}
-              className="px-2.5 py-1 bg-secondary-100 text-secondary-700 rounded-lg text-xs font-heading border-2 border-secondary-300 whitespace-nowrap"
+              className="px-2 py-0.5 bg-secondary-100 text-secondary-700 rounded-lg text-xs font-heading border-2 border-secondary-300 whitespace-nowrap h-fit"
             >
               {mood}
             </span>
           ))}
         </div>
 
-        {/* Spacer */}
-        <div className="flex-1" />
+        {/* Spacer - takes remaining space */}
+        <div className="flex-1 min-h-0" />
 
-        {/* Platform Links - always at bottom */}
-        <div className="flex gap-2">
+        {/* Platform Links - always at bottom, flex-shrink-0 */}
+        <div className="flex gap-2 flex-shrink-0">
           {track_platform_links?.map((link) => (
             <PlatformButton
               key={link.id}
