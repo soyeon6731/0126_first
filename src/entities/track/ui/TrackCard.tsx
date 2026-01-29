@@ -36,40 +36,45 @@ export function TrackCard({ track, isHiddenGem = false, index }: TrackCardProps)
       </div>
 
       {/* Track Info */}
-      <h4 className="font-heading text-lg text-neutral-900 mb-1 truncate">
-        {title}
-      </h4>
-      <p className="text-sm text-neutral-600 truncate mb-3">{artist}</p>
+      <div className="flex-1 flex flex-col">
+        <h4 className="font-heading text-lg text-neutral-900 mb-1 truncate">
+          {title}
+        </h4>
+        <p className="text-sm text-neutral-600 truncate mb-3">{artist}</p>
 
-      {/* Genre & Mood Tags - Pixel Style */}
-      <div className="flex flex-wrap gap-1.5 mb-3">
-        {genres.slice(0, 2).map((genre) => (
-          <span
-            key={genre}
-            className="px-2.5 py-1 bg-primary-100 text-primary-700 rounded-lg text-xs font-heading border-2 border-primary-300"
-          >
-            {genre}
-          </span>
-        ))}
-        {mood_tags.slice(0, 1).map((mood) => (
-          <span
-            key={mood}
-            className="px-2.5 py-1 bg-secondary-100 text-secondary-700 rounded-lg text-xs font-heading border-2 border-secondary-300"
-          >
-            {mood}
-          </span>
-        ))}
-      </div>
+        {/* Genre & Mood Tags - Pixel Style */}
+        <div className="flex flex-wrap gap-1.5 mb-3">
+          {genres.slice(0, 2).map((genre) => (
+            <span
+              key={genre}
+              className="px-2.5 py-1 bg-primary-100 text-primary-700 rounded-lg text-xs font-heading border-2 border-primary-300"
+            >
+              {genre}
+            </span>
+          ))}
+          {mood_tags.slice(0, 1).map((mood) => (
+            <span
+              key={mood}
+              className="px-2.5 py-1 bg-secondary-100 text-secondary-700 rounded-lg text-xs font-heading border-2 border-secondary-300"
+            >
+              {mood}
+            </span>
+          ))}
+        </div>
 
-      {/* Platform Links */}
-      <div className="flex gap-2">
-        {track_platform_links?.map((link) => (
-          <PlatformButton
-            key={link.id}
-            platform={link.music_platforms.platform_name}
-            url={link.external_url}
-          />
-        ))}
+        {/* Spacer to push buttons to bottom */}
+        <div className="flex-1" />
+
+        {/* Platform Links */}
+        <div className="flex gap-2 mt-auto">
+          {track_platform_links?.map((link) => (
+            <PlatformButton
+              key={link.id}
+              platform={link.music_platforms.platform_name}
+              url={link.external_url}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
